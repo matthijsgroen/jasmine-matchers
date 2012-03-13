@@ -5,9 +5,15 @@ window.before = window.beforeEach
 before ->
   @addMatchers
     # Usage:
-    # expect(["one", "two"]).toHave 2, "strings"
-    # expect({ list_items: ["one", "two"] }).toHave 2, "list_items"
-    # exoect({ models: -> ["one", "two"] }).toHave 2, "models"
+    #
+    # Plain arrays:
+    #   expect(["one", "two"]).toHave 2, "strings"
+    #
+    # Sub collections:
+    #   expect({ list_items: ["one", "two"] }).toHave 2, "list_items"
+    #
+    # Method invocation:
+    #   expect({ models: -> ["one", "two"] }).toHave 2, "models"
     toHave: (expected, item_name = 'items') ->
       try
         maybe_collection = eval("this.actual.#{item_name}")
