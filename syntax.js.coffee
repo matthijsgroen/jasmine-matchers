@@ -33,10 +33,10 @@ before ->
         false
 
     # Usage:
-    #   expect(-> model.set({ stuff: "value"})).toTrigger(model, "change:stuff")
-    toTrigger: (object, trigger_name) ->
+    #   expect(-> model.set({ stuff: "value"})).toTrigger("change:stuff", from: model)
+    toTrigger: (trigger_name, { from }) ->
       callback = sinon.spy()
-      object.bind(trigger_name, callback)
+      from.bind(trigger_name, callback)
       @actual()
       @message = -> "Expected '#{trigger_name}' #{if @isNot then "not "} to be fired"
       callback.callCount is 1
